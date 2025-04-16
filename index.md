@@ -14,8 +14,8 @@ This is a simple example of **Markdown formatting**.
 ## Features  
 
 - **Bold Text**  
-- *Italic Text*  
-- Links: [Visit OpenAI](https://www.openai.com)  
++ *Italic Text*  
+* Links: [Visit OpenAI](https://www.openai.com)  
 
 ### Code Example  
 
