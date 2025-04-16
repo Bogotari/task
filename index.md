@@ -9,7 +9,7 @@ When rendered, the above Markdown will look like this:
 
 # My Markdown Example  
 
-This is a simple example of **Markdown formatting**.  
+>This is a simple example of **Markdown formatting**.  
 
 ## Features  
 
