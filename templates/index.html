@@ -1,1 +1,103 @@
-<div data-tf-live="01JT66WTH93ANC6N68QB0K47TB"></div><script src="//embed.typeform.com/next/embed.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XML Processor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f9;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .content {
+      margin-top: 20px;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .post {
+      margin-bottom: 20px;
+    }
+
+    .post h2 {
+      margin: 0;
+      color: #007bff;
+    }
+
+    .post p {
+      margin: 5px 0 0;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>XML Processor</h1>
+  <div id="output" class="content">Loading...</div>
+
+  <script>
+    const xmlFilePath = 'luchi.WordPress.2025-05-04.xml';
+
+    // Fetch and process the XML file
+    fetch(xmlFilePath)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch XML file');
+        }
+        return response.text();
+      })
+      .then(xmlString => {
+        // Parse the XML string into a DOM object
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+
+        // Process and display the XML content
+        processXML(xmlDoc);
+      })
+      .catch(error => {
+        document.getElementById('output').textContent = `Error: ${error.message}`;
+      });
+
+    function processXML(xml) {
+      const outputDiv = document.getElementById('output');
+      outputDiv.innerHTML = ''; // Clear any previous content
+
+      // Example: Display blog posts from WordPress XML
+      const posts = xml.getElementsByTagName('item'); // Assuming <item> contains blog posts
+      if (posts.length === 0) {
+        outputDiv.textContent = 'No posts available!';
+        return;
+      }
+
+      for (let i = 0; i < posts.length; i++) {
+        const post = posts[i];
+        const title = post.getElementsByTagName('title')[0]?.textContent || 'Untitled';
+        const description = post.getElementsByTagName('description')[0]?.textContent || 'No description';
+
+        // Create HTML elements for the post
+        const postDiv = document.createElement('div');
+        postDiv.className = 'post';
+        const postTitle = document.createElement('h2');
+        postTitle.textContent = title;
+        const postDescription = document.createElement('p');
+        postDescription.textContent = description;
+
+        postDiv.appendChild(postTitle);
+        postDiv.appendChild(postDescription);
+        outputDiv.appendChild(postDiv);
+      }
+    }
+  </script>
+</body>
+</html>
+
